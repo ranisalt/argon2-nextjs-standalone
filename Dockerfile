@@ -9,6 +9,7 @@ RUN corepack enable pnpm && pnpm i --frozen-lockfile
 COPY . .
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+ENV ARGON2_PREBUILDS_GLOB="linux-*/*.musl.*"
 RUN pnpm run build
 
 # Production image, copy all the files and run next
@@ -19,10 +20,6 @@ WORKDIR /app
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown 1000:1000 .next
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing

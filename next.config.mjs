@@ -3,7 +3,9 @@ const nextConfig = {
   output: "standalone",
   experimental: {
     outputFileTracingIncludes: {
-      "/login": ["./node_modules/argon2/prebuilds/**"],
+      "/login": [
+        `./node_modules/argon2/prebuilds/${process.env.ARGON2_PREBUILDS_GLOB || "**"}`,
+      ],
     },
   },
 };

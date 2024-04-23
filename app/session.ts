@@ -11,6 +11,6 @@ export function deleteSession() {
 }
 
 export async function verifyPassword(password: string) {
-  const hash = await argon2.hash('password');
+  const hash = await argon2.hash("password");
   return await argon2.verify(hash, password);
 }
