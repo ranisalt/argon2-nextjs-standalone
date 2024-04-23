@@ -10,6 +10,7 @@ export function deleteSession() {
   cookies().delete("session");
 }
 
-export async function verifyPassword(password: string, hash: string) {
+export async function verifyPassword(password: string) {
+  const hash = await argon2.hash('password');
   return await argon2.verify(hash, password);
 }

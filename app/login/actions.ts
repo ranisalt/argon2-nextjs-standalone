@@ -3,9 +3,6 @@ import { z } from "zod";
 import { createSession, verifyPassword } from "../session";
 
 const email = "user@email.com";
-// password = 'password'
-const password =
-  "$argon2id$v=19$m=65536,t=3,p=4$2l+ZIidufdSmtl0T6dm9Dg$7CzyP7OUyLsGVwmtXuphqGeapw+nuJnTvJ3b/ios7bo";
 
 const LoginFormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }).trim(),
@@ -38,7 +35,7 @@ export async function login(state: FormState, formData: FormData) {
     return { errors: { email: ["Email not found."] } };
   }
 
-  if (!(await verifyPassword(data.password, password))) {
+  if (!(await verifyPassword(data.password))) {
     return { errors: { password: ["Incorrect password."] } };
   }
 
